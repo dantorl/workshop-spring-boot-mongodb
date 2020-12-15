@@ -1,5 +1,6 @@
 package com.torquato.workshopmongo.resources;
 
+import com.torquato.workshopmongo.domain.Post;
 import com.torquato.workshopmongo.domain.User;
 import com.torquato.workshopmongo.dto.UserDTO;
 import com.torquato.workshopmongo.services.UserService;
@@ -39,6 +40,14 @@ public class UserResources {
         Optional<User> user = userService.findById(id);
 
         return ResponseEntity.ok(new UserDTO(user.get()));
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+
+        Optional<User> user = userService.findById(id);
+
+        return ResponseEntity.ok(user.get().getPosts());
     }
 
     @PostMapping
