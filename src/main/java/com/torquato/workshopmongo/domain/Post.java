@@ -1,12 +1,15 @@
 package com.torquato.workshopmongo.domain;
 
 import com.torquato.workshopmongo.dto.AuthorDTO;
+import com.torquato.workshopmongo.dto.ComentarioDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Document
@@ -18,6 +21,7 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDTO author;
+    private List<ComentarioDTO> comments = new ArrayList<>();
 
     public Post() {
     }
@@ -64,6 +68,14 @@ public class Post implements Serializable {
 
     public AuthorDTO getAuthor() {
         return author;
+    }
+
+    public List<ComentarioDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<ComentarioDTO> comments) {
+        this.comments = comments;
     }
 
     public void setAuthor(AuthorDTO author) {
