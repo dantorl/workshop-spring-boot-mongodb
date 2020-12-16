@@ -3,6 +3,7 @@ package com.torquato.workshopmongo.resources;
 import com.torquato.workshopmongo.domain.Post;
 import com.torquato.workshopmongo.domain.User;
 import com.torquato.workshopmongo.dto.UserDTO;
+import com.torquato.workshopmongo.resources.util.URL;
 import com.torquato.workshopmongo.services.PostService;
 import com.torquato.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,16 @@ public class PostResources {
         Optional<Post> post = postService.findById(id);
 
         return ResponseEntity.ok(post.get());
+    }
+
+    @GetMapping("/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text",defaultValue = "") String text){
+
+        text = URL.decodeParam(text);
+
+        List<Post> posts = postService.finByTitle(text);
+
+        return ResponseEntity.ok(posts);
     }
 
 }
